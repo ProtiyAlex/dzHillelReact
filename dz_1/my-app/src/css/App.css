@@ -1,0 +1,23 @@
+.app-header,
+.app-main,
+.app-footer {
+  background-color: #282c34;
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.app-main {
+  background-color: #576175;
+  min-height: 60vh;
+  flex-direction: unset;
+  justify-content: flex-start;
+  align-items: unset;
+}
+.app-footer {
+  background-color: #8395b9;
+  min-height: 20vh;
+}
