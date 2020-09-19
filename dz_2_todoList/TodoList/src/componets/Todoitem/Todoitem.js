@@ -9,7 +9,12 @@ export default class Todoitem extends Component {
         onClick={() => this.props.onToggle(this.props.item.id)}
       >
         {this.props.item.title}
-        <span className="delete-btn">X</span>
+        <span
+          className="delete-btn"
+          onClick={(e) => this.props.delTodo(e, this.props.item.id)}
+        >
+          X
+        </span>
       </div>
     );
   }

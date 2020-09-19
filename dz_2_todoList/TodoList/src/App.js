@@ -2,7 +2,7 @@ import React from "react";
 import Todolist from "./componets/TodoList/Todolist";
 import Todoform from "./componets/Todoform/Todoform";
 
-import "./App.css";
+import "./css/App.css";
 import "./css/reset.css";
 
 export default class App extends React.Component {
@@ -35,19 +35,37 @@ export default class App extends React.Component {
     });
   };
   addTodo = (title) => {
-    const todo = {
-      id: Date.now(),
-      title: title,
-      isDone: false,
-    };
-    this.setState({ todoListItems: [...this.state.todoListItems, todo] });
+    if (title && title.length > 0) {
+      const todo = {
+        id: Date.now(),
+        title: title,
+        isDone: false,
+      };
+      this.setState({ todoListItems: [...this.state.todoListItems, todo] });
+    } else {
+      alert(`Ничего не введено`);
+    }
 
-    console.log(this.state);
+    // console.log(title);
   };
+
+  delTodo = (e, id) => {
+    this.setState({
+      todoListItems: this.state.todoListItems.filter((item) => {
+        return item.id !== id;
+      }),
+    });
+    e.stopPropagation();
+  };
+
   render() {
     return (
       <div className="todo">
-        <Todolist todos={this.state.todoListItems} onToggle={this.toggleTodo} />
+        <Todolist
+          todos={this.state.todoListItems}
+          onToggle={this.toggleTodo}
+          delTodo={this.delTodo}
+        />
         <Todoform addTodo={this.addTodo} />
       </div>
     );
