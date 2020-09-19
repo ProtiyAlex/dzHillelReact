@@ -51,9 +51,7 @@ export default class App extends React.Component {
 
   delTodo = (e, id) => {
     this.setState({
-      todoListItems: this.state.todoListItems.filter((item) => {
-        return item.id !== id;
-      }),
+      todoListItems: this.state.todoListItems.filter((item) => item.id !== id),
     });
     e.stopPropagation();
   };

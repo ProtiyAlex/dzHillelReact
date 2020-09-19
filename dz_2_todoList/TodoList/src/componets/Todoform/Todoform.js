@@ -25,7 +25,7 @@ export default class Todoform extends Component {
           type="text"
           value={this.state.value}
           onChange={this.handleChange}
-        ></input>
+        />
         <button className="form-add-btn" onClick={() => this.onClickAddBtn()}>
           ADD
         </button>
