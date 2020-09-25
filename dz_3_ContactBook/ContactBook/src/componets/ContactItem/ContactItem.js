@@ -1,21 +1,19 @@
 import React, { Component } from "react";
-import "./todoitem.css";
+import "./ContactItem.css";
 
-export default class Todoitem extends Component {
+export default class ContactItem extends Component {
   render() {
     return (
-      <div
-        className={"todo-item" + (this.props.item.isDone ? " done" : "")}
-        onClick={() => this.props.onToggle(this.props.item.id)}
-      >
-        {this.props.item.title}
-        <span
-          className="delete-btn"
-          onClick={(e) => this.props.delTodo(e, this.props.item.id)}
-        >
-          X
-        </span>
+      <div className="contact--item">
+        {console.log(this.props.contactItem.name)}
+        {this.props.contactItem.name + " " + this.props.contactItem.surname}
+        {/* {console.log(this.props.contactList[0].name)} */}
       </div>
     );
   }
 }
+
+/* {this.props.ContactItem.forEach((item) => (
+          <div className="contact--item">{item.name}</div>
+        ))} */
+/* <div className="contact--item">dfgdfrtg</div> */

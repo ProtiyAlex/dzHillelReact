@@ -1,29 +1,32 @@
 import React, { Component } from "react";
-import "./Contactform.css";
+import "./ContactForm.css";
 
-export default class Contactform extends Component {
+export default class ContactForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: [
-        { name: "" },
-        { surname: "" },
-        { mphone: "" },
-        { phone: "" },
-        { email: "" },
-      ],
+      input: {
+        name: "",
+        surname: "",
+        mphone: "",
+        phone: "",
+        email: "",
+      },
     };
 
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      input: { ...this.state.input, [e.target.name]: e.target.value },
+    });
     console.log(e.target.name);
   }
   onClickSaveBtn() {
-    this.props.addContact(this.state.input);
-    this.setState({ value: "" });
+    // console.log(this.state.input);
+    this.props.editContact(this.state.input);
+    //this.setState({ value: "" });
   }
 
   render() {

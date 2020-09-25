@@ -1,20 +1,12 @@
 .contact--list {
   background-color: blanchedalmond;
-  width: 20%;
+  min-width: 20%;
   min-height: 100vh;
   padding: 10px;
   display: flex;
   flex-direction: column;
 }
-.contact--item {
-  height: 30px;
-  min-width: 300px;
-  background-color: chocolate;
-  text-align: center;
 
-  line-height: 30px;
-  margin-bottom: 5px;
-}
 .contact--btn {
   height: 30px;
   width: 120px;

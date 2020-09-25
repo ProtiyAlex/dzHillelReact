@@ -1,13 +1,25 @@
 import React, { Component } from "react";
-//import Todoitem from "../Todoitem/Todoitem";
-import "./Contactlist.css";
+import ContactItem from "../ContactItem/ContactItem";
+import "./ContactList.css";
 
 export default class Contactlist extends Component {
+  onClickAddBtn() {
+    this.props.editContact();
+
+    console.log(this.props.state.editedContact);
+  }
+
   render() {
     return (
       <div className="contact--list">
-        <p className="contact--item">contact--form</p>
-        <button className="contact--btn">ADD</button>
+        {console.log(this.props.state.contactListItems)}
+        {this.props.state.contactListItems.map((item) => (
+          <ContactItem key={item.id} contactItem={item} />
+        ))}
+
+        <button className="contact--btn" onClick={() => this.onClickAddBtn()}>
+          ADD
+        </button>
         {/* {this.props.todos.map((item) => {
           return (
             <Todoitem

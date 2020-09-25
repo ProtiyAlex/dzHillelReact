@@ -1,6 +1,6 @@
 import React from "react";
-import Contactform from "./componets/Contactform/Contactform";
-import Contactlist from "./componets/Contactlist/Contactlist";
+import ContactForm from "./componets/ContactForm/ContactForm";
+import ContactList from "./componets/ContactList/ContactList";
 
 import "./css/App.css";
 import "./css/reset.css";
@@ -10,8 +10,11 @@ export default class App extends React.Component {
     contactListItems: [
       // {
       //   id: 1,
-      //   title: "Task 1",
-      //   isDone: false,
+      //   name: "jhlkjh",
+      //   surname: "",
+      //   mphone: "",
+      //   phone: "",
+      //   email: "",
       // },
       // {
       //   id: 2,
@@ -24,6 +27,13 @@ export default class App extends React.Component {
       //   isDone: false,
       // },
     ],
+    editedContact: {
+      name: "",
+      surname: "",
+      mphone: "",
+      phone: "",
+      email: "",
+    },
   };
 
   toggleTodo = (id) => {
@@ -34,21 +44,37 @@ export default class App extends React.Component {
       }),
     });
   };
-  addContact = (contact) => {
-    const Contact = {
-      id: Date.now(),
-      name: contact.name,
-      surname: contact.surname,
-      mphone: contact.mphone,
-      phone: contact.phone,
-      email: contact.email,
-    };
-    this.setState({
-      contactListItems: [...this.state.contactListItems, Contact],
-    });
+  editContact = (contactItem) => {
+    console.log(contactItem);
 
-    // console.log(title);
+    if (!contactItem) {
+      console.log(this.state.editedContact);
+      this.setState({
+        contactListItems: [
+          ...this.state.contactListItems,
+          { id: Date.now(), ...this.state.editedContact },
+        ],
+      });
+    } else {
+      this.setState({
+        editedContact: { ...this.state.editedContact, ...contactItem },
+      });
+    }
   };
+  // this.state.editedContact = {
+  //   id: Date.now(),
+  //   ...contactItem,
+  //   // name: contact.name,
+  //   // surname: contact.surname,
+  //   // mphone: contact.mphone,
+  //   // phone: contact.phone,
+  //   // email: contact.email,
+  // };
+  // this.setState({
+  //   contactListItems: [...this.state.contactListItems, Contact],
+  // });
+
+  //console.log(Contact);
 
   delTodo = (e, id) => {
     this.setState({
@@ -60,8 +86,8 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="ContactBook">
-        <Contactlist />
-        <Contactform />
+        <ContactList state={this.state} editContact={this.editContact} />
+        <ContactForm editContact={this.editContact} />
         {/* <Todolist
           todos={this.state.todoListItems}
           onToggle={this.toggleTodo}
