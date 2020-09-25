@@ -1,0 +1,12 @@
+.delete-btn {
+  float: right;
+}
+.todo-item {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 5px;
+  background-color: yellow;
+}
+.done {
+  background-color: green;
+}
