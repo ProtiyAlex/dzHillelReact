@@ -8,13 +8,19 @@ export default class Contactlist extends Component {
 
     console.log(this.props.state.editedContact);
   }
-
+  OnClickContact(id) {
+    console.log(id);
+  }
   render() {
     return (
       <div className="contact--list">
         {console.log(this.props.state.contactListItems)}
         {this.props.state.contactListItems.map((item) => (
-          <ContactItem key={item.id} contactItem={item} />
+          <ContactItem
+            key={item.id}
+            contactItem={item}
+            onClick={() => this.OnClickContact(item.id)}
+          />
         ))}
 
         <button className="contact--btn" onClick={() => this.onClickAddBtn()}>

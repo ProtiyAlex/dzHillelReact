@@ -87,7 +87,10 @@ export default class App extends React.Component {
     return (
       <div className="ContactBook">
         <ContactList state={this.state} editContact={this.editContact} />
-        <ContactForm editContact={this.editContact} />
+        <ContactForm
+          state={this.state.editedContact}
+          editContact={this.editContact}
+        />
         {/* <Todolist
           todos={this.state.todoListItems}
           onToggle={this.toggleTodo}

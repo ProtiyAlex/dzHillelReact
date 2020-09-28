@@ -18,14 +18,17 @@ export default class ContactForm extends Component {
   }
 
   handleChange(e) {
+    this.props.editContact({ [e.target.name]: e.target.value });
+
     this.setState({
       input: { ...this.state.input, [e.target.name]: e.target.value },
     });
-    console.log(e.target.name);
+    // this.props.editContact(this.state.input);
+    //console.log(e.target.name);
   }
   onClickSaveBtn() {
-    // console.log(this.state.input);
-    this.props.editContact(this.state.input);
+    console.log(this.props.state.name);
+    //this.props.editContact(this.state.input);
     //this.setState({ value: "" });
   }
 
