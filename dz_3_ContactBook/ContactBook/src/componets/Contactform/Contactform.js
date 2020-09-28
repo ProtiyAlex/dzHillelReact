@@ -4,32 +4,61 @@ import "./ContactForm.css";
 export default class ContactForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      input: {
-        name: "",
-        surname: "",
-        mphone: "",
-        phone: "",
-        email: "",
-      },
-    };
+    // this.state = {
+    //   input: {
+    //     name: "",
+    //     surname: "",
+    //     mphone: "",
+    //     phone: "",
+    //     email: "",
+    //   },
+    // };
 
     this.handleChange = this.handleChange.bind(this);
+
+    // }
   }
 
   handleChange(e) {
-    this.props.editContact({ [e.target.name]: e.target.value });
-
-    this.setState({
-      input: { ...this.state.input, [e.target.name]: e.target.value },
-    });
-    // this.props.editContact(this.state.input);
-    //console.log(e.target.name);
+    this.props.setEditedContact({ [e.target.name]: e.target.value });
   }
-  onClickSaveBtn() {
-    console.log(this.props.state.name);
-    //this.props.editContact(this.state.input);
-    //this.setState({ value: "" });
+  onClickSaveBtn(e) {
+    console.log("гте-то тут ");
+    let contactList = [];
+    if (this.props.state.editedContact.id === "") {
+      this.addContact(contactList);
+      this.props.clearForm();
+    } else {
+      this.editContact(contactList);
+    }
+    e.preventDefault();
+  }
+
+  addContact(contactList) {
+    const contact = {
+      ...this.props.state.editedContact,
+      ...{ id: Date.now() },
+    };
+    contactList = [...this.props.state.contactListItems, contact];
+    console.log(contactList);
+    this.props.setContactList(contactList);
+  }
+
+  editContact(contactList) {
+    contactList = this.props.state.contactListItems.map((item) => {
+      if (item.id !== this.props.state.editedContact.id) return item;
+      return this.props.state.editedContact;
+    });
+    this.props.setContactList(contactList);
+    console.log("1");
+  }
+
+  onClickDelBtn() {
+    const contactList = this.props.state.contactListItems.filter(
+      (item) => item.id !== this.props.state.editedContact.id
+    );
+    // console.log(contactList);
+    this.props.setContactList(contactList);
   }
 
   render() {
@@ -39,7 +68,7 @@ export default class ContactForm extends Component {
           placeholder="Name"
           className="form--input"
           type="text"
-          value={this.state.input.name}
+          value={this.props.state.editedContact.name}
           onChange={this.handleChange}
           name="name"
         />
@@ -47,7 +76,7 @@ export default class ContactForm extends Component {
           placeholder="Surname"
           className="form--input"
           type="text"
-          value={this.state.input.surname}
+          value={this.props.state.editedContact.surname}
           onChange={this.handleChange}
           name="surname"
         />
@@ -55,7 +84,7 @@ export default class ContactForm extends Component {
           placeholder="Mob. Phone"
           className="form--input"
           type="phone"
-          value={this.state.input.mphone}
+          value={this.props.state.editedContact.mphone}
           onChange={this.handleChange}
           name="mphone"
         />
@@ -63,7 +92,7 @@ export default class ContactForm extends Component {
           placeholder="Phone"
           className="form--input"
           type="phone"
-          value={this.state.input.phone}
+          value={this.props.state.editedContact.phone}
           onChange={this.handleChange}
           name="phone"
         />
@@ -71,12 +100,12 @@ export default class ContactForm extends Component {
           placeholder="E-mail"
           className="form--input"
           type="email"
-          value={this.state.input.email}
+          value={this.props.state.editedContact.email}
           onChange={this.handleChange}
           name="email"
         />
         <div className="form-btn">
-          <button className="btn-save" onClick={() => this.onClickSaveBtn()}>
+          <button className="btn-save" onClick={(e) => this.onClickSaveBtn(e)}>
             SAVE
           </button>
           <button className="btn-delete" onClick={() => this.onClickDelBtn()}>

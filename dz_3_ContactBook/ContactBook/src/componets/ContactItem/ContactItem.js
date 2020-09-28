@@ -6,9 +6,10 @@ export default class ContactItem extends Component {
     return (
       <div
         className="contact--item"
-        onClick={() => this.OnClickContact(this.props.key)}
+        onClick={() => this.props.OnClickContact(this.props.contactItem)}
       >
-        {console.log(this.props.contactItem.name)}
+        {console.log(this.props.contactItem.id)}
+        {console.log("нарисовал контакт " + this.props.contactItem.name)}
         {this.props.contactItem.name + " " + this.props.contactItem.surname}
         {/* {console.log(this.props.contactList[0].name)} */}
       </div>

@@ -7,33 +7,36 @@ import "./css/reset.css";
 
 export default class App extends React.Component {
   state = {
-    contactListItems: [
-      // {
-      //   id: 1,
-      //   name: "jhlkjh",
-      //   surname: "",
-      //   mphone: "",
-      //   phone: "",
-      //   email: "",
-      // },
-      // {
-      //   id: 2,
-      //   title: "Task 2",
-      //   isDone: true,
-      // },
-      // {
-      //   id: 3,
-      //   title: "Task 3",
-      //   isDone: false,
-      // },
-    ],
+    contactListItems: [],
     editedContact: {
+      id: "",
       name: "",
       surname: "",
       mphone: "",
       phone: "",
       email: "",
     },
+  };
+
+  setContactList = (contactList) => {
+    console.log("setcont");
+    this.setState({
+      contactListItems: [...contactList],
+    });
+  };
+
+  clearForm() {
+    const clean = this.state.editedContact;
+    for (const key in clean) {
+      clean[key] = "";
+    }
+    this.setEditedContact(clean);
+  }
+
+  setEditedContact = (contactItem) => {
+    this.setState({
+      editedContact: { ...this.state.editedContact, ...contactItem },
+    });
   };
 
   toggleTodo = (id) => {
@@ -44,23 +47,7 @@ export default class App extends React.Component {
       }),
     });
   };
-  editContact = (contactItem) => {
-    console.log(contactItem);
 
-    if (!contactItem) {
-      console.log(this.state.editedContact);
-      this.setState({
-        contactListItems: [
-          ...this.state.contactListItems,
-          { id: Date.now(), ...this.state.editedContact },
-        ],
-      });
-    } else {
-      this.setState({
-        editedContact: { ...this.state.editedContact, ...contactItem },
-      });
-    }
-  };
   // this.state.editedContact = {
   //   id: Date.now(),
   //   ...contactItem,
@@ -76,27 +63,21 @@ export default class App extends React.Component {
 
   //console.log(Contact);
 
-  delTodo = (e, id) => {
-    this.setState({
-      todoListItems: this.state.todoListItems.filter((item) => item.id !== id),
-    });
-    e.stopPropagation();
-  };
-
   render() {
     return (
       <div className="ContactBook">
-        <ContactList state={this.state} editContact={this.editContact} />
+        <ContactList
+          state={this.state}
+          setEditedContact={this.setEditedContact}
+          clearForm={() => this.clearForm()}
+        />
         <ContactForm
-          state={this.state.editedContact}
-          editContact={this.editContact}
+          setContactList={this.setContactList}
+          setEditedContact={this.setEditedContact}
+          state={this.state}
+          //state={this.state.contactListItems}
+          clearForm={() => this.clearForm()}
         />
-        {/* <Todolist
-          todos={this.state.todoListItems}
-          onToggle={this.toggleTodo}
-          delTodo={this.delTodo}
-        />
-        <Todoform addTodo={this.addTodo} /> */}
       </div>
     );
   }
