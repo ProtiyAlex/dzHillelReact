@@ -5,7 +5,6 @@ import "./ContactList.css";
 export default class Contactlist extends Component {
   onClickAddBtn() {
     this.props.clearForm();
-    // e.stopPropagation();
   }
 
   OnClickContact = (contact) => {
@@ -15,7 +14,6 @@ export default class Contactlist extends Component {
   render() {
     return (
       <div className="contact--list">
-        {/* {console.log(this.props.state.contactListItems)} */}
         {this.props.state.contactListItems.map((item) => (
           <ContactItem
             key={item.id}

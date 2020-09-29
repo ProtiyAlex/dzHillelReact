@@ -4,19 +4,8 @@ import "./ContactForm.css";
 export default class ContactForm extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   input: {
-    //     name: "",
-    //     surname: "",
-    //     mphone: "",
-    //     phone: "",
-    //     email: "",
-    //   },
-    // };
 
     this.handleChange = this.handleChange.bind(this);
-
-    // }
   }
 
   handleChange(e) {
