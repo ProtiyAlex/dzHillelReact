@@ -6,31 +6,41 @@ import "./css/App.css";
 import "./css/reset.css";
 
 export default class App extends React.Component {
-  state = {
-    contactListItems: [],
-    editedContact: {
-      id: "",
-      name: "",
-      surname: "",
-      mphone: "",
-      phone: "",
-      email: "",
-    },
+  contactDefault = {
+    id: "",
+    name: "",
+    surname: "",
+    mphone: "",
+    phone: "",
+    email: "",
   };
 
+  state = {
+    contactListItems: [],
+    editedContact: this.contactDefault,
+  };
+
+  constructor(props) {
+    super(props);
+
+    let itemsArray = localStorage.getItem("items")
+      ? JSON.parse(localStorage.getItem("items"))
+      : this.state;
+
+    localStorage.setItem("items", JSON.stringify(itemsArray));
+  }
+
   setContactList = (contactList) => {
-    console.log("setcont");
-    this.setState({
-      contactListItems: [...contactList],
-    });
+    this.setState(
+      {
+        contactListItems: [...contactList],
+      },
+      () => localStorage.setItem("items", JSON.stringify(this.state))
+    );
   };
 
   clearForm() {
-    const clean = this.state.editedContact;
-    for (const key in clean) {
-      clean[key] = "";
-    }
-    this.setEditedContact(clean);
+    this.setEditedContact(this.contactDefault);
   }
 
   setEditedContact = (contactItem) => {
@@ -47,6 +57,14 @@ export default class App extends React.Component {
       }),
     });
   };
+
+  componentDidMount() {
+    console.log("componentDidMount");
+    const data = JSON.parse(localStorage.getItem("items"));
+
+    this.setContactList(data.contactListItems);
+    console.log(data);
+  }
 
   // this.state.editedContact = {
   //   id: Date.now(),
