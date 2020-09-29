@@ -49,15 +49,6 @@ export default class App extends React.Component {
     });
   };
 
-  toggleTodo = (id) => {
-    this.setState({
-      todoListItems: this.state.todoListItems.map((item) => {
-        if (item.id !== id) return item;
-        return { ...item, isDone: !item.isDone };
-      }),
-    });
-  };
-
   componentDidMount() {
     const data = JSON.parse(localStorage.getItem("items"));
 
