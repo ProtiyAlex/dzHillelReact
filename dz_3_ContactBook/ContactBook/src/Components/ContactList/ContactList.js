@@ -9,7 +9,6 @@ export default class Contactlist extends Component {
 
   OnClickContact = (contact) => {
     this.props.setEditedContact(contact);
-    console.log("тут точно");
   };
   render() {
     return (

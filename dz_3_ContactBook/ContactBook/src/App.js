@@ -59,11 +59,9 @@ export default class App extends React.Component {
   };
 
   componentDidMount() {
-    console.log("componentDidMount");
     const data = JSON.parse(localStorage.getItem("items"));
 
     this.setContactList(data.contactListItems);
-    console.log(data);
   }
 
   render() {
@@ -78,7 +76,6 @@ export default class App extends React.Component {
           setContactList={this.setContactList}
           setEditedContact={this.setEditedContact}
           state={this.state}
-          //state={this.state.contactListItems}
           clearForm={() => this.clearForm()}
         />
       </div>

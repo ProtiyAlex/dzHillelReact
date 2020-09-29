@@ -11,8 +11,7 @@ export default class ContactForm extends Component {
   handleChange(e) {
     this.props.setEditedContact({ [e.target.name]: e.target.value });
   }
-  onClickSaveBtn(e) {
-    console.log("гте-то тут ");
+  onClickSaveBtn() {
     let contactList = [];
     if (this.props.state.editedContact.id === "") {
       this.addContact(contactList);
@@ -20,7 +19,6 @@ export default class ContactForm extends Component {
     } else {
       this.editContact(contactList);
     }
-    e.preventDefault();
   }
 
   addContact(contactList) {
@@ -29,7 +27,6 @@ export default class ContactForm extends Component {
       ...{ id: Date.now() },
     };
     contactList = [...this.props.state.contactListItems, contact];
-    console.log(contactList);
     this.props.setContactList(contactList);
   }
 
@@ -39,15 +36,14 @@ export default class ContactForm extends Component {
       return this.props.state.editedContact;
     });
     this.props.setContactList(contactList);
-    console.log("1");
   }
 
   onClickDelBtn() {
     const contactList = this.props.state.contactListItems.filter(
       (item) => item.id !== this.props.state.editedContact.id
     );
-    // console.log(contactList);
     this.props.setContactList(contactList);
+    this.props.clearForm();
   }
 
   render() {
@@ -94,23 +90,13 @@ export default class ContactForm extends Component {
           name="email"
         />
         <div className="form-btn">
-          <button className="btn-save" onClick={(e) => this.onClickSaveBtn(e)}>
+          <button className="btn-save" onClick={() => this.onClickSaveBtn()}>
             SAVE
           </button>
           <button className="btn-delete" onClick={() => this.onClickDelBtn()}>
             Delete
           </button>
         </div>
-
-        {/* <input
-          className="form-input"
-          type="text"
-          value={this.state.value}
-          onChange={this.handleChange}
-        />
-        <button className="form-add-btn" onClick={() => this.onClickAddBtn()}>
-          ADD
-        </button> */}
       </div>
     );
   }
