@@ -1,0 +1,9 @@
+.contact--item {
+  height: 30px;
+  min-width: 300px;
+  background-color: chocolate;
+  text-align: center;
+
+  line-height: 30px;
+  margin-bottom: 5px;
+}

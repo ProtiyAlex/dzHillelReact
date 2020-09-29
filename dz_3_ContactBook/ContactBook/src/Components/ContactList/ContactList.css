@@ -1,0 +1,14 @@
+.contact--list {
+  background-color: blanchedalmond;
+  min-width: 20%;
+  min-height: 100vh;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact--btn {
+  height: 30px;
+  width: 120px;
+  background-color: cornflowerblue;
+}
