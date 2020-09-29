@@ -66,21 +66,6 @@ export default class App extends React.Component {
     console.log(data);
   }
 
-  // this.state.editedContact = {
-  //   id: Date.now(),
-  //   ...contactItem,
-  //   // name: contact.name,
-  //   // surname: contact.surname,
-  //   // mphone: contact.mphone,
-  //   // phone: contact.phone,
-  //   // email: contact.email,
-  // };
-  // this.setState({
-  //   contactListItems: [...this.state.contactListItems, Contact],
-  // });
-
-  //console.log(Contact);
-
   render() {
     return (
       <div className="ContactBook">
