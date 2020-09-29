@@ -8,6 +8,16 @@ export default class ContactForm extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  state = {
+    input: [
+      { name: "name", type: "text", id: 1 },
+      { name: "surname", type: "text", id: 2 },
+      { name: "mphone", type: "tel", id: 3 },
+      { name: "phone", type: "tel", id: 4 },
+      { name: "email", type: "email", id: 5 },
+    ],
+  };
+
   handleChange(e) {
     this.props.setEditedContact({ [e.target.name]: e.target.value });
   }
@@ -49,46 +59,21 @@ export default class ContactForm extends Component {
   render() {
     return (
       <div className="contact--form">
-        <input
-          placeholder="Name"
-          className="form--input"
-          type="text"
-          value={this.props.state.editedContact.name}
-          onChange={this.handleChange}
-          name="name"
-        />
-        <input
-          placeholder="Surname"
-          className="form--input"
-          type="text"
-          value={this.props.state.editedContact.surname}
-          onChange={this.handleChange}
-          name="surname"
-        />
-        <input
-          placeholder="Mob. Phone"
-          className="form--input"
-          type="phone"
-          value={this.props.state.editedContact.mphone}
-          onChange={this.handleChange}
-          name="mphone"
-        />
-        <input
-          placeholder="Phone"
-          className="form--input"
-          type="phone"
-          value={this.props.state.editedContact.phone}
-          onChange={this.handleChange}
-          name="phone"
-        />
-        <input
-          placeholder="E-mail"
-          className="form--input"
-          type="email"
-          value={this.props.state.editedContact.email}
-          onChange={this.handleChange}
-          name="email"
-        />
+        {this.state.input.map((item) => {
+          console.log(item.name);
+          return (
+            <input
+              key={item.id}
+              placeholder={item.name}
+              className="form--input"
+              type={item.name}
+              value={this.props.state.editedContact[item.name]}
+              onChange={this.handleChange}
+              name={item.name}
+            />
+          );
+        })}
+
         <div className="form-btn">
           <button className="btn-save" onClick={() => this.onClickSaveBtn()}>
             SAVE
