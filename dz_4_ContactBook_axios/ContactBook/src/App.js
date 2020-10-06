@@ -22,7 +22,6 @@ export default class App extends React.Component {
   };
 
   setContactList = (contactList) => {
-    console.log(contactList);
     this.setState({
       contactListItems: [...contactList],
     });
@@ -104,7 +103,6 @@ export default class App extends React.Component {
           onDelete={this.onDelete}
           setEditedContact={this.setEditedContact}
           state={this.state}
-          clearForm={() => this.clearForm()}
         />
       </div>
     );
