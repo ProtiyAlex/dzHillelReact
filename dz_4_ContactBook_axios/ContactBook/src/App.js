@@ -1,6 +1,7 @@
 import React from "react";
 import ContactForm from "./Components/ContactForm/ContactForm";
 import ContactList from "./Components/ContactList/ContactList";
+import contactService from "./contactbook-service";
 
 import "./css/App.css";
 import "./css/reset.css";
@@ -20,23 +21,11 @@ export default class App extends React.Component {
     editedContact: this.contactDefault,
   };
 
-  constructor(props) {
-    super(props);
-
-    let itemsArray = localStorage.getItem("items")
-      ? JSON.parse(localStorage.getItem("items"))
-      : this.state;
-
-    localStorage.setItem("items", JSON.stringify(itemsArray));
-  }
-
   setContactList = (contactList) => {
-    this.setState(
-      {
-        contactListItems: [...contactList],
-      },
-      () => localStorage.setItem("items", JSON.stringify(this.state))
-    );
+    console.log(contactList);
+    this.setState({
+      contactListItems: [...contactList],
+    });
   };
 
   clearForm() {
@@ -49,10 +38,57 @@ export default class App extends React.Component {
     });
   };
 
-  componentDidMount() {
-    const data = JSON.parse(localStorage.getItem("items"));
+  onSave = () => {
+    let contactList = [];
 
-    this.setContactList(data.contactListItems);
+    if (this.state.editedContact.id === "") {
+      this.addContact(contactList);
+      this.clearForm(contactList);
+    } else {
+      this.editContact(contactList);
+    }
+  };
+
+  addContact(contactList) {
+    let contact = {};
+
+    contactService.post("/", this.state.editedContact).then(({ data }) => {
+      contact = data;
+
+      contactList = [...this.state.contactListItems, contact];
+
+      this.setContactList(contactList);
+    });
+  }
+
+  editContact(contactList) {
+    contactList = this.state.contactListItems.map((item) => {
+      if (item.id !== this.state.editedContact.id) return item;
+      return this.state.editedContact;
+    });
+    contactService.put(
+      "/" + this.state.editedContact.id,
+      this.state.editedContact
+    );
+
+    this.setContactList(contactList);
+  }
+
+  onDelete = () => {
+    const contactList = this.state.contactListItems.filter(
+      (item) => item.id !== this.state.editedContact.id
+    );
+
+    contactService.delete("/" + this.state.editedContact.id);
+
+    this.setContactList(contactList);
+    this.clearForm();
+  };
+
+  componentDidMount() {
+    contactService
+      .get("/")
+      .then(({ data }) => this.setState({ contactListItems: data }));
   }
 
   render() {
@@ -64,7 +100,8 @@ export default class App extends React.Component {
           clearForm={() => this.clearForm()}
         />
         <ContactForm
-          setContactList={this.setContactList}
+          onSave={this.onSave}
+          onDelete={this.onDelete}
           setEditedContact={this.setEditedContact}
           state={this.state}
           clearForm={() => this.clearForm()}

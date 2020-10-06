@@ -22,45 +22,17 @@ export default class ContactForm extends Component {
     this.props.setEditedContact({ [e.target.name]: e.target.value });
   }
   onClickSaveBtn() {
-    let contactList = [];
-    if (this.props.state.editedContact.id === "") {
-      this.addContact(contactList);
-      this.props.clearForm();
-    } else {
-      this.editContact(contactList);
-    }
-  }
-
-  addContact(contactList) {
-    const contact = {
-      ...this.props.state.editedContact,
-      ...{ id: Date.now() },
-    };
-    contactList = [...this.props.state.contactListItems, contact];
-    this.props.setContactList(contactList);
-  }
-
-  editContact(contactList) {
-    contactList = this.props.state.contactListItems.map((item) => {
-      if (item.id !== this.props.state.editedContact.id) return item;
-      return this.props.state.editedContact;
-    });
-    this.props.setContactList(contactList);
+    this.props.onSave();
   }
 
   onClickDelBtn() {
-    const contactList = this.props.state.contactListItems.filter(
-      (item) => item.id !== this.props.state.editedContact.id
-    );
-    this.props.setContactList(contactList);
-    this.props.clearForm();
+    this.props.onDelete();
   }
 
   render() {
     return (
       <div className="contact--form">
         {this.state.input.map((item) => {
-          console.log(item.name);
           return (
             <input
               key={item.id}

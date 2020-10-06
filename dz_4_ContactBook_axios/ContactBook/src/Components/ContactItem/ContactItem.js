@@ -6,7 +6,7 @@ export default class ContactItem extends Component {
     return (
       <div
         className="contact--item"
-        onClick={() => this.props.OnClickContact(this.props.contactItem)}
+        onClick={() => this.props.onClickContact(this.props.contactItem)}
       >
         {this.props.contactItem.name + " " + this.props.contactItem.surname}
       </div>

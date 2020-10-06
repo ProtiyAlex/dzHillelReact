@@ -7,7 +7,7 @@ export default class Contactlist extends Component {
     this.props.clearForm();
   }
 
-  OnClickContact = (contact) => {
+  onClickContact = (contact) => {
     this.props.setEditedContact(contact);
   };
   render() {
@@ -17,7 +17,7 @@ export default class Contactlist extends Component {
           <ContactItem
             key={item.id}
             contactItem={item}
-            OnClickContact={this.OnClickContact}
+            onClickContact={this.onClickContact}
           />
         ))}
 
