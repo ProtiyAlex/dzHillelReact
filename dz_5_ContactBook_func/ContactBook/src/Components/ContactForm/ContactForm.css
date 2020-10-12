@@ -1,0 +1,37 @@
+/* .form-add-btn,
+.form-input {
+  width: 50px;
+  height: 30px;
+  border: 1px solid black;
+}
+.form-input {
+  width: 150px;
+  margin-right: 10px;
+} */
+
+.contact--form {
+  background-color: rgb(177, 147, 111);
+  width: 40%;
+  padding: 10px;
+}
+.form--input {
+  display: block;
+  height: 30px;
+  min-width: 300px;
+  background-color: rgb(131, 88, 58);
+  text-align: center;
+  line-height: 30px;
+  margin-bottom: 5px;
+}
+
+.form-btn {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
+.btn-save,
+.btn-delete {
+  height: 30px;
+  width: 120px;
+  background-color: cornflowerblue;
+}
