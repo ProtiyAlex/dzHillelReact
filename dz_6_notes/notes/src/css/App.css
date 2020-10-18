@@ -1,0 +1,19 @@
+.notes-wrap {
+  /* display: flex; */
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.notes-header {
+  height: 50px;
+  background-color: burlywood;
+  width: 100%;
+  text-align: center;
+
+  padding: 10px 0 0 0;
+}
+.addNotes {
+  height: 30px;
+  width: 100px;
+  background-color: cornflowerblue;
+}
