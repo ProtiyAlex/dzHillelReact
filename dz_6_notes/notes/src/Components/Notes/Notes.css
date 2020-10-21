@@ -19,3 +19,6 @@
   float: right;
   line-height: 20px;
 }
+.notes--index {
+  z-index: 100;
+}

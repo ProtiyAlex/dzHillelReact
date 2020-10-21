@@ -50,6 +50,9 @@ function delNote (id) {
    setNotesItems([...noteslist]); 
 }
 
+
+
+
   
     return (
       <div className="notes-wrap">
@@ -57,7 +60,7 @@ function delNote (id) {
         {notesItems.map((item)=>(
         <Notes
             key={item.id}
-            notes={item}
+            note={item}
             notesItems={notesItems}
             setNotesItems={setNotesItems}
             onSaveServ={onSaveServ}
